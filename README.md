@@ -1,6 +1,4 @@
-# This case is to demonstrate the use of React and fecthing API
-
-## The project is based on functionality with only plain styling
+# This case is to demonstrate the use of React and fecthing API and is based on functionality with only minimum styling
 
 ### NOTE: When cloning, make sure to clone from the master branch
 
