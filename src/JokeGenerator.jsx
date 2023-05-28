@@ -1,39 +1,32 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import axios from 'axios';
 import image1 from './assets/chucknorris.jpeg'
 
 
 function JokeGenerator (){
 
     const [joke, setJoke] = useState("");
-    const [image, setImage] = useState("");
-    const [category, setCategory] = useState("");
 
-    let GenerateJoke = () => {
-        fetch("https://api.chucknorris.io/jokes/random")
-        .then(res => res.json())
-        .then(
-          (joke) => {
-            setJoke(joke.value);
-            setImage(joke.icon_url)
-            setCategory(joke.categories)
-            // console.log(joke)
-          }
-        )
-      }
+   const getJoke = () => {
+    axios.get('https://api.chucknorris.io/jokes/random')
+    .then(res =>{
+        setJoke(res.data.value)
+    }).catch(err => {
+        console.log(err)
+    })
+   }
 
     return (
-
-            <div className="jokes">
-                <h1>Heere you can generate a random Chuck Norris joke, by clicking on the "Generate now" button</h1>
-                <img src={image1} alt="chuckimage" />
-                <button className="joke_btn" onClick={GenerateJoke}>Generate Joke</button>
-                <h2>{joke}</h2>
-                {/* <p>{image}</p> */}
-                {/* <p>Category: {category}</p> */}
+            <div className="container">
+                <div className="image-container">
+                    <img src={image1} alt="chuckimage" />
+                </div>
+                <div className="text-container">
+                    <h1>Here you can generate a random Chuck Norris joke, by clicking on the "Generate now" button</h1>
+                    <button className="joke-btn" onClick={getJoke}>Generate Joke</button>
+                    { joke && <p>{joke}</p>}
+                </div>
             </div>
-       
+    )}
 
-    )
-    }
-    
     export default JokeGenerator
